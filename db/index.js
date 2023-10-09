@@ -154,6 +154,64 @@ const MenteeForm = sequelize.define(
 	}
 );
 
+const CV = sequelize.define(
+	"cv",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		}
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+);
+
+const Hobi = sequelize.define(
+	"hobi",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},name: {
+			type: DataTypes.STRING(250),
+		},description: {
+			type: DataTypes.STRING(4000),
+		},isProfiessional: {
+			type: DataTypes.BOOLEAN,
+		},
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+);
+
+const CV2HOBI = sequelize.define(
+	"cv2hobi",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},cv_id: {
+			type: DataTypes.INTEGER,
+		},hobi_id: {
+			type: DataTypes.INTEGER,
+		}
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+);
+
 // Export
 export default sequelize;
-export { sequelize, PublicUser, SuperAdmin, Mentee};
+export { sequelize, PublicUser, SuperAdmin, Mentee, MenteeForm, CV, Hobi, CV2HOBI};
