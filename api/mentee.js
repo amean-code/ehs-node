@@ -39,6 +39,51 @@ MenteeApiRouter.get("/add", async(req, res) => {
 	)
 });
 
+MenteeApiRouter.put("/update/:id", async(req, res) => {
+    const id = req.params.id
+    const menteeData = req.body;
+    console.log(`MENTEE DATA: `,menteeData);
+
+    menteeData.password = md5(menteeData.password);
+    menteeData.verified = false;
+    menteeData.accepted = false;
+    menteeData.verify_code = generate(6);
+
+    const mentee = await Mentee.findOne({where:{id:id}});
+
+    if (!mentee) {
+        return res.status(400).json({ message: 'Mentee not found' })
+    }
+
+    const updateMentee = await Mentee.update( menteeData, { where: { id: id} });
+
+	res.json(
+		{
+			success: true,
+			data: [...updateMentee],
+			message: "mentee-api-updated",
+		}
+	)
+});
+
+MenteeApiRouter.delete("/delete/:id", async(req, res) => {
+    const id = req.params.id
+
+    const mentee = await Mentee.findOne({where:{id:id}});
+
+    if (!mentee) {
+        return res.status(400).json({ message: 'Mentee not found' })
+    }
+
+    const destroyMentee = await Mentee.destroy({ where: { id: id} });
+
+	res.json(
+		{
+			success: true,
+			message: "mentee-api-deleted",
+		}
+	)
+});
 
 function generate(n) {
     var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
