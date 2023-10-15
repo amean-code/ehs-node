@@ -547,94 +547,94 @@ const CV2ProjeBilgisi = sequelize.define(
 );
 
 // CV - Mentee bağlantı
-CV.hasOne(MenteeForm);
-MenteeForm.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-Mentee.hasOne(MenteeForm);
-MenteeForm.belongsTo(Mentee, {
-	foreignKey: 'mentee_id'
-});
+// CV.hasOne(MenteeForm);
+// MenteeForm.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// Mentee.hasOne(MenteeForm);
+// MenteeForm.belongsTo(Mentee, {
+// 	foreignKey: 'mentee_id'
+// });
 
-// CV - Hobi bağlantı
-CV.hasOne(CV2HOBI);
-CV2HOBI.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-Hobi.hasOne(CV2HOBI);
-CV2HOBI.belongsTo(Hobi, {
-	foreignKey: 'hobi_id'
-});
+// // CV - Hobi bağlantı
+// CV.hasOne(CV2HOBI);
+// CV2HOBI.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// Hobi.hasOne(CV2HOBI);
+// CV2HOBI.belongsTo(Hobi, {
+// 	foreignKey: 'hobi_id'
+// });
 
-// CV - Dil bağlantı
-CV.hasOne(CV2DIL);
-CV2DIL.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-Dil.hasOne(CV2DIL);
-CV2DIL.belongsTo(Dil, {
-	foreignKey: 'dil_id'
-});
+// // CV - Dil bağlantı
+// CV.hasOne(CV2DIL);
+// CV2DIL.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// Dil.hasOne(CV2DIL);
+// CV2DIL.belongsTo(Dil, {
+// 	foreignKey: 'dil_id'
+// });
 
-// CV - Yayin bağlantı
-CV.hasOne(CV2YAYIN);
-CV2YAYIN.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-Yayin.hasOne(CV2YAYIN);
-CV2YAYIN.belongsTo(Yayin, {
-	foreignKey: 'yayin_id'
-});
+// // CV - Yayin bağlantı
+// CV.hasOne(CV2YAYIN);
+// CV2YAYIN.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// Yayin.hasOne(CV2YAYIN);
+// CV2YAYIN.belongsTo(Yayin, {
+// 	foreignKey: 'yayin_id'
+// });
 
-// CV - BilgisayarBecerisi bağlantı
-CV.hasOne(CV2BilgisayarBecerisi);
-CV2BilgisayarBecerisi.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-BilgisayarBecerisi.hasOne(CV2BilgisayarBecerisi);
-CV2BilgisayarBecerisi.belongsTo(BilgisayarBecerisi, {
-	foreignKey: 'bilgisayar_becerisi_id'
-});
+// // CV - BilgisayarBecerisi bağlantı
+// CV.hasOne(CV2BilgisayarBecerisi);
+// CV2BilgisayarBecerisi.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// BilgisayarBecerisi.hasOne(CV2BilgisayarBecerisi);
+// CV2BilgisayarBecerisi.belongsTo(BilgisayarBecerisi, {
+// 	foreignKey: 'bilgisayar_becerisi_id'
+// });
 
-// CV - EgitimBilgisi bağlantı
-CV.hasOne(CV2EgitimBilgisi);
-CV2EgitimBilgisi.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-EgitimBilgisi.hasOne(CV2EgitimBilgisi);
-CV2EgitimBilgisi.belongsTo(EgitimBilgisi, {
-	foreignKey: 'egitim_bilgisi_id'
-});
+// // CV - EgitimBilgisi bağlantı
+// CV.hasOne(CV2EgitimBilgisi);
+// CV2EgitimBilgisi.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// EgitimBilgisi.hasOne(CV2EgitimBilgisi);
+// CV2EgitimBilgisi.belongsTo(EgitimBilgisi, {
+// 	foreignKey: 'egitim_bilgisi_id'
+// });
 
-// CV - TecrubeBilgisi bağlantı
-CV.hasOne(CV2TecrubeBilgisi);
-CV2TecrubeBilgisi.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-TecrubeBilgisi.hasOne(CV2TecrubeBilgisi);
-CV2TecrubeBilgisi.belongsTo(TecrubeBilgisi, {
-	foreignKey: 'tecrube_bilgisi_id'
-});
+// // CV - TecrubeBilgisi bağlantı
+// CV.hasOne(CV2TecrubeBilgisi);
+// CV2TecrubeBilgisi.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// TecrubeBilgisi.hasOne(CV2TecrubeBilgisi);
+// CV2TecrubeBilgisi.belongsTo(TecrubeBilgisi, {
+// 	foreignKey: 'tecrube_bilgisi_id'
+// });
 
-// CV - KursBilgisi bağlantı
-CV.hasOne(CV2KursBilgisi);
-CV2KursBilgisi.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-KursBilgisi.hasOne(CV2KursBilgisi);
-CV2KursBilgisi.belongsTo(KursBilgisi, {
-	foreignKey: 'kurs_bilgisi_id'
-});
+// // CV - KursBilgisi bağlantı
+// CV.hasOne(CV2KursBilgisi);
+// CV2KursBilgisi.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// KursBilgisi.hasOne(CV2KursBilgisi);
+// CV2KursBilgisi.belongsTo(KursBilgisi, {
+// 	foreignKey: 'kurs_bilgisi_id'
+// });
 
-// CV - ProjeBilgisi bağlantı
-CV.hasOne(CV2ProjeBilgisi);
-CV2ProjeBilgisi.belongsTo(CV, {
-	foreignKey: 'cv_id'
-});
-ProjeBilgisi.hasOne(CV2ProjeBilgisi);
-CV2ProjeBilgisi.belongsTo(ProjeBilgisi, {
-	foreignKey: 'proje_bilgisi_id'
-});
+// // CV - ProjeBilgisi bağlantı
+// CV.hasOne(CV2ProjeBilgisi);
+// CV2ProjeBilgisi.belongsTo(CV, {
+// 	foreignKey: 'cv_id'
+// });
+// ProjeBilgisi.hasOne(CV2ProjeBilgisi);
+// CV2ProjeBilgisi.belongsTo(ProjeBilgisi, {
+// 	foreignKey: 'proje_bilgisi_id'
+// });
 
 
 // Export

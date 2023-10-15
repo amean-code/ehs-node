@@ -11,6 +11,7 @@ import  {SuperAdmin,PublicUser} from "./db/index.js";
 
 // ? Routers
 import apiRouter from "./api/index.js";
+import authRouter from "./core/auth.js";
 
 
 // ! UPDATE WITH EHS SMTP
@@ -49,6 +50,7 @@ app.get("/", (req,res) => {
 })
 
 app.use("/api",apiRouter);
+app.use("/auth", authRouter);
 
 // * ERROR HANDLING
 app.use((err, req, res, next) => {
