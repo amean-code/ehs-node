@@ -2,14 +2,14 @@ import { Router } from "express";
 import formRouter from "./form.js";
 import { md5, transporter, jwt} from "../index.js";
 import MenteeApiRouter from "./mentee.js";
-import HobiApiRouter from "./hobi.js";
-import DilApiRouter from "./dil.js";
-import YayinApiRouter from "./yayin.js";
-import BilgisayarBecerisiApiRouter from "./bilgisayar_becerisi.js";
-import EgitimBilgisiApiRouter from "./egitim_bilgisi.js";
-import TecrubeBilgisiApiRouter from "./tecrube_bilgisi.js";
-import KursBilgisiApiRouter from "./kurs_bilgisi.js";
-import ProjeBilgisiApiRouter from "./proje_bilgisi.js"
+import HobbyApiRouter from "./hobby.js";
+import LanguageApiRouter from "./language.js";
+import PublishApiRouter from "./publish.js";
+import ComputerSkillApiRouter from "./computer_skill.js";
+import EducationInformationApiRouter from "./education_information.js";
+import ExperienceInformationApiRouter from "./experience_information.js";
+import CourseInformationApiRouter from "./course_information.js";
+import ProjectInformationApiRouter from "./project_information.js"
 
 
 // Router yapısı
@@ -27,14 +27,14 @@ apiRouter.get("/", (req, res) => {
 
 apiRouter.use("/form",formRouter);
 apiRouter.use("/mentee",MenteeApiRouter);
-apiRouter.use("/hobi",HobiApiRouter);
-apiRouter.use("/dil",DilApiRouter);
-apiRouter.use("/yayin",YayinApiRouter);
-apiRouter.use("/bilgisayarBecerisi",BilgisayarBecerisiApiRouter);
-apiRouter.use("/egitimBilgisi",EgitimBilgisiApiRouter);
-apiRouter.use("/tecrubeBilgisi",TecrubeBilgisiApiRouter);
-apiRouter.use("/kursBilgisi",KursBilgisiApiRouter);
-apiRouter.use("/projeBilgisi",ProjeBilgisiApiRouter);
+apiRouter.use("/hobby",HobbyApiRouter);
+apiRouter.use("/language",LanguageApiRouter);
+apiRouter.use("/publish",PublishApiRouter);
+apiRouter.use("/computerSkill",ComputerSkillApiRouter);
+apiRouter.use("/educationInformation",EducationInformationApiRouter);
+apiRouter.use("/experienceInformation",ExperienceInformationApiRouter);
+apiRouter.use("/courseInformation",CourseInformationApiRouter);
+apiRouter.use("/projectInformation",ProjectInformationApiRouter);
 
 export default apiRouter;
 

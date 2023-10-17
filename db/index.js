@@ -170,8 +170,8 @@ const CV = sequelize.define(
 	}
 );
 
-const Hobi = sequelize.define(
-	"hobi",
+const Hobby = sequelize.define(
+	"hobby",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -192,8 +192,8 @@ const Hobi = sequelize.define(
 	}
 );
 
-const CV2HOBI = sequelize.define(
-	"cv2hobi",
+const CV2Hobby = sequelize.define(
+	"cv2hobby",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -201,7 +201,7 @@ const CV2HOBI = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},hobi_id: {
+		},hobby_id: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -212,16 +212,16 @@ const CV2HOBI = sequelize.define(
 	}
 );
 
-const Dil = sequelize.define(
-	"dil",
+const Language = sequelize.define(
+	"language",
 	{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
-		},dil: {
+		},language: {
 			type: DataTypes.STRING(250),
-		},bayrak: {
+		},flag: {
 			type: DataTypes.STRING(250),
 		}
 	},
@@ -232,8 +232,8 @@ const Dil = sequelize.define(
 	}
 );
 
-const CV2DIL = sequelize.define(
-	"cv2dil",
+const CV2Language = sequelize.define(
+	"cv2language",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -241,9 +241,9 @@ const CV2DIL = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},dil_id: {
+		},language_id: {
 			type: DataTypes.INTEGER,
-		},puan: {
+		},point: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -254,8 +254,8 @@ const CV2DIL = sequelize.define(
 	}
 );
 
-const Yayin = sequelize.define(
-	"yayin",
+const Publish = sequelize.define(
+	"publish",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -263,9 +263,9 @@ const Yayin = sequelize.define(
 			primaryKey: true,
 		},name: {
 			type: DataTypes.STRING(250),
-		},yayinlayan_kurum: {
+		},publishing_institution: {
 			type: DataTypes.STRING(250),
-		},yayin_tarihi: {
+		},publish_date: {
 			type: DataTypes.STRING(250),
 		},DOI: {
 			type: DataTypes.STRING(250),
@@ -278,8 +278,8 @@ const Yayin = sequelize.define(
 	}
 );
 
-const CV2YAYIN = sequelize.define(
-	"cv2yayin",
+const CV2Publish = sequelize.define(
+	"cv2publish",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -287,7 +287,7 @@ const CV2YAYIN = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},yayin_id: {
+		},publish_id: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -298,14 +298,14 @@ const CV2YAYIN = sequelize.define(
 	}
 );
 
-const BilgisayarBecerisi = sequelize.define(
-	"bilgisayar_becerisi",
+const ComputerSkill = sequelize.define(
+	"computer_skill",
 	{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
-		},beceri: {
+		},skill: {
 			type: DataTypes.STRING(250),
 		}
 	},
@@ -316,8 +316,8 @@ const BilgisayarBecerisi = sequelize.define(
 	}
 );
 
-const CV2BilgisayarBecerisi = sequelize.define(
-	"cv2bilgisayar_becerisi",
+const CV2ComputerSkill = sequelize.define(
+	"cv2computer_skill",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -325,9 +325,9 @@ const CV2BilgisayarBecerisi = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},bilgisayar_becerisi_id: {
+		},computer_skill_id: {
 			type: DataTypes.INTEGER,
-		},puan: {
+		},point: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -338,28 +338,28 @@ const CV2BilgisayarBecerisi = sequelize.define(
 	}
 );
 
-const EgitimBilgisi = sequelize.define(
-	"egitim_bilgisi",
+const EducationInformation = sequelize.define(
+	"education_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
-		},okul: {
+		},university: {
 			type: DataTypes.STRING(250),
-		},bölüm: {
+		},department: {
 			type: DataTypes.STRING(250),
-		},derece: {
+		},rate: {
 			type: DataTypes.STRING(250),
-		},baslangic: {
+		},start_date: {
 			type: DataTypes.DATE,
-		},bitis: {
+		},finish_date: {
 			type: DataTypes.DATE,
-		},ilgini_ceken_ders: {
+		},interesting_lesson: {
 			type: DataTypes.STRING(250),
-		},proje_arastirma_konulari: {
+		},project_research_topics: {
 			type: DataTypes.STRING(1000),
-		},aktif_klupler: {
+		},active_clubs: {
 			type: DataTypes.STRING(250),
 		}
 	},
@@ -370,8 +370,8 @@ const EgitimBilgisi = sequelize.define(
 	}
 );
 
-const CV2EgitimBilgisi = sequelize.define(
-	"cv2egitim_bilgisi",
+const CV2EducationInformation = sequelize.define(
+	"cv2education_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -379,7 +379,7 @@ const CV2EgitimBilgisi = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},egitim_bilgisi_id: {
+		},education_information_id: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -390,28 +390,28 @@ const CV2EgitimBilgisi = sequelize.define(
 	}
 );
 
-const TecrubeBilgisi = sequelize.define(
-	"tecrube_bilgisi",
+const ExperienceInformation = sequelize.define(
+	"experience_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
-		},pozisyon: {
+		},position: {
 			type: DataTypes.STRING(250),
-		},kurum: {
+		},institution: {
 			type: DataTypes.STRING(250),
-		},baslangic: {
+		},start_date: {
 			type: DataTypes.DATE,
-		},bitis: {
+		},finish_date: {
 			type: DataTypes.DATE,
-		},gorev_1: {
+		},task_1: {
 			type: DataTypes.STRING(250),
-		},gorev_2: {
+		},task_2: {
 			type: DataTypes.STRING(250),
-		},gorev_3: {
+		},task_3: {
 			type: DataTypes.STRING(250),
-		},teknolojiler: {
+		},technologies: {
 			type: DataTypes.STRING(250),
 		}
 	},
@@ -422,8 +422,8 @@ const TecrubeBilgisi = sequelize.define(
 	}
 );
 
-const CV2TecrubeBilgisi = sequelize.define(
-	"cv2tecrube_bilgisi",
+const CV2ExperienceInformation = sequelize.define(
+	"cv2experience_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -431,7 +431,7 @@ const CV2TecrubeBilgisi = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},tecrube_bilgisi_id: {
+		},experience_information_id: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -442,8 +442,8 @@ const CV2TecrubeBilgisi = sequelize.define(
 	}
 );
 
-const KursBilgisi = sequelize.define(
-	"kurs_bilgisi",
+const CourseInformation = sequelize.define(
+	"course_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -451,15 +451,15 @@ const KursBilgisi = sequelize.define(
 			primaryKey: true,
 		},name: {
 			type: DataTypes.STRING(250),
-		},kurum: {
+		},institution: {
 			type: DataTypes.STRING(250),
-		},tamamlama_tarihi: {
+		},finish_date: {
 			type: DataTypes.DATE,
-		},yetenek_1: {
+		},skill_1: {
 			type: DataTypes.STRING(250),
-		},yetenek_2: {
+		},skill_2: {
 			type: DataTypes.STRING(250),
-		},yetenek_3: {
+		},skill_3: {
 			type: DataTypes.STRING(250),
 		}
 	},
@@ -470,8 +470,8 @@ const KursBilgisi = sequelize.define(
 	}
 );
 
-const CV2KursBilgisi = sequelize.define(
-	"cv2kurs_bilgisi",
+const CV2CourseInformation = sequelize.define(
+	"cv2course_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -479,7 +479,7 @@ const CV2KursBilgisi = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},kurs_bilgisi_id: {
+		},course_information_id: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -490,32 +490,32 @@ const CV2KursBilgisi = sequelize.define(
 	}
 );
 
-const ProjeBilgisi = sequelize.define(
-	"proje_bilgisi",
+const ProjectInformation = sequelize.define(
+	"project_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
-		},proje: {
+		},project: {
 			type: DataTypes.STRING(250),
-		},yer: {
+		},city: {
 			type: DataTypes.STRING(250),
-		},destekleyen_kurum: {
+		},supporting_institution: {
 			type: DataTypes.STRING(250),
-		},fonlayan_kurum: {
+		},funding_institution: {
 			type: DataTypes.STRING(250),
-		},butce: {
+		},budget: {
 			type: DataTypes.STRING(250),
-		},gorev_1: {
+		},task_1: {
 			type: DataTypes.STRING(250),
-		},gorev_2: {
+		},task_2: {
 			type: DataTypes.STRING(250),
-		},gorev_3: {
+		},task_3: {
 			type: DataTypes.STRING(250),
-		},teknolojiler: {
+		},technologies: {
 			type: DataTypes.STRING(250),
-		},oduller: {
+		},awards: {
 			type: DataTypes.STRING(250),
 		}
 	},
@@ -526,8 +526,8 @@ const ProjeBilgisi = sequelize.define(
 	}
 );
 
-const CV2ProjeBilgisi = sequelize.define(
-	"cv2proje_bilgisi",
+const CV2ProjectInformation = sequelize.define(
+	"cv2project_information",
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -535,7 +535,7 @@ const CV2ProjeBilgisi = sequelize.define(
 			primaryKey: true,
 		},cv_id: {
 			type: DataTypes.INTEGER,
-		},proje_bilgisi_id: {
+		},project_information_id: {
 			type: DataTypes.INTEGER,
 		}
 	},
@@ -556,91 +556,91 @@ const CV2ProjeBilgisi = sequelize.define(
 // 	foreignKey: 'mentee_id'
 // });
 
-// // CV - Hobi bağlantı
-// CV.hasOne(CV2HOBI);
-// CV2HOBI.belongsTo(CV, {
+// // CV - Hobby bağlantı
+// CV.hasOne(CV2Hobby);
+// CV2Hobby.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// Hobi.hasOne(CV2HOBI);
-// CV2HOBI.belongsTo(Hobi, {
-// 	foreignKey: 'hobi_id'
+// Hobby.hasOne(CV2Hobby);
+// CV2Hobby.belongsTo(Hobby, {
+// 	foreignKey: 'hobby_id'
 // });
 
-// // CV - Dil bağlantı
-// CV.hasOne(CV2DIL);
-// CV2DIL.belongsTo(CV, {
+// // CV - Language bağlantı
+// CV.hasOne(CV2Language);
+// CV2Language.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// Dil.hasOne(CV2DIL);
-// CV2DIL.belongsTo(Dil, {
-// 	foreignKey: 'dil_id'
+// Language.hasOne(CV2Language);
+// CV2Language.belongsTo(Language, {
+// 	foreignKey: 'language_id'
 // });
 
-// // CV - Yayin bağlantı
-// CV.hasOne(CV2YAYIN);
-// CV2YAYIN.belongsTo(CV, {
+// // CV - Publish bağlantı
+// CV.hasOne(CV2Publish);
+// CV2Publish.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// Yayin.hasOne(CV2YAYIN);
-// CV2YAYIN.belongsTo(Yayin, {
-// 	foreignKey: 'yayin_id'
+// Publish.hasOne(CV2Publish);
+// CV2Publish.belongsTo(Publish, {
+// 	foreignKey: 'publish_id'
 // });
 
-// // CV - BilgisayarBecerisi bağlantı
-// CV.hasOne(CV2BilgisayarBecerisi);
-// CV2BilgisayarBecerisi.belongsTo(CV, {
+// // CV - ComputerSkill bağlantı
+// CV.hasOne(CV2ComputerSkill);
+// CV2ComputerSkill.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// BilgisayarBecerisi.hasOne(CV2BilgisayarBecerisi);
-// CV2BilgisayarBecerisi.belongsTo(BilgisayarBecerisi, {
-// 	foreignKey: 'bilgisayar_becerisi_id'
+// ComputerSkill.hasOne(CV2ComputerSkill);
+// CV2ComputerSkill.belongsTo(ComputerSkill, {
+// 	foreignKey: 'computer_skill_id'
 // });
 
-// // CV - EgitimBilgisi bağlantı
-// CV.hasOne(CV2EgitimBilgisi);
-// CV2EgitimBilgisi.belongsTo(CV, {
+// // CV - EducationInformation bağlantı
+// CV.hasOne(CV2EducationInformation);
+// CV2EducationInformation.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// EgitimBilgisi.hasOne(CV2EgitimBilgisi);
-// CV2EgitimBilgisi.belongsTo(EgitimBilgisi, {
-// 	foreignKey: 'egitim_bilgisi_id'
+// EducationInformation.hasOne(CV2EducationInformation);
+// CV2EducationInformation.belongsTo(EducationInformation, {
+// 	foreignKey: 'education_information_id'
 // });
 
-// // CV - TecrubeBilgisi bağlantı
-// CV.hasOne(CV2TecrubeBilgisi);
-// CV2TecrubeBilgisi.belongsTo(CV, {
+// // CV - ExperienceInformation bağlantı
+// CV.hasOne(CV2ExperienceInformation);
+// CV2ExperienceInformation.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// TecrubeBilgisi.hasOne(CV2TecrubeBilgisi);
-// CV2TecrubeBilgisi.belongsTo(TecrubeBilgisi, {
-// 	foreignKey: 'tecrube_bilgisi_id'
+// ExperienceInformation.hasOne(CV2ExperienceInformation);
+// CV2ExperienceInformation.belongsTo(ExperienceInformation, {
+// 	foreignKey: 'experience_information_id'
 // });
 
-// // CV - KursBilgisi bağlantı
-// CV.hasOne(CV2KursBilgisi);
-// CV2KursBilgisi.belongsTo(CV, {
+// // CV - CourseInformation bağlantı
+// CV.hasOne(CV2CourseInformation);
+// CV2CourseInformation.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// KursBilgisi.hasOne(CV2KursBilgisi);
-// CV2KursBilgisi.belongsTo(KursBilgisi, {
-// 	foreignKey: 'kurs_bilgisi_id'
+// CourseInformation.hasOne(CV2CourseInformation);
+// CV2CourseInformation.belongsTo(CourseInformation, {
+// 	foreignKey: 'course_information_id'
 // });
 
-// // CV - ProjeBilgisi bağlantı
-// CV.hasOne(CV2ProjeBilgisi);
-// CV2ProjeBilgisi.belongsTo(CV, {
+// // CV - ProjectInformation bağlantı
+// CV.hasOne(CV2ProjectInformation);
+// CV2ProjectInformation.belongsTo(CV, {
 // 	foreignKey: 'cv_id'
 // });
-// ProjeBilgisi.hasOne(CV2ProjeBilgisi);
-// CV2ProjeBilgisi.belongsTo(ProjeBilgisi, {
-// 	foreignKey: 'proje_bilgisi_id'
+// ProjectInformation.hasOne(CV2ProjectInformation);
+// CV2ProjectInformation.belongsTo(ProjectInformation, {
+// 	foreignKey: 'project_information_id'
 // });
 
 
 // Export
 export default sequelize;
 export { sequelize, PublicUser, SuperAdmin, Mentee, MenteeForm, CV, 
-		Hobi, CV2HOBI, Dil, CV2DIL, Yayin, CV2YAYIN, BilgisayarBecerisi, 
-		CV2BilgisayarBecerisi, EgitimBilgisi , CV2EgitimBilgisi, 
-		TecrubeBilgisi, CV2TecrubeBilgisi, KursBilgisi, CV2KursBilgisi, 
-		ProjeBilgisi , CV2ProjeBilgisi};
+		Hobby, CV2Hobby, Language, CV2Language, Publish, CV2Publish, ComputerSkill, 
+		CV2ComputerSkill, EducationInformation , CV2EducationInformation, 
+		ExperienceInformation, CV2ExperienceInformation, CourseInformation, CV2CourseInformation, 
+		ProjectInformation , CV2ProjectInformation};
