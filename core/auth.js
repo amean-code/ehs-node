@@ -104,9 +104,9 @@ authRouter.post("/register", (req, res) => {
 
 			if (created) {
 				transporter.sendMail({
-					from: '"Energy Hack Sapce" <amean.academy@gmail.com>', //
+					from: '"Energy Hack Space" <amean.academy@gmail.com>', //
 					to: req.body.email,
-					subject: "Energy Hack Sapce - Doğrulama Kodun",
+					subject: "Energy Hack Space - Doğrulama Kodun",
 					text: verify_code,
 					html: `
 						<h1 style="user-select:none;color:#2ca2f1;font-weight: bolder; font-size: 50px;text-align:center; padding: 10px 50px;margin:0; margin-top: 20px; margin-bottom: 10px;">
@@ -179,9 +179,34 @@ authRouter.post("/verify-code", async (req, res) => {
 		if (Mentee) {
 			if (Mentee.getDataValue("verify_code") === req.body.verify_code) {
 				Mentee?.setDataValue("verified", true);
-				await Mentee.save();
 
-				const accessToken = jwt.sign(Mentee.dataValues, process.env.ACCESS_TOKEN_SECRET);				
+				const accessToken = jwt.sign(Mentee.dataValues, process.env.ACCESS_TOKEN_SECRET);
+				
+				Db.MenteeForm.findOrCreate({
+					where: {
+						mentee_id: Mentee.getDataValue("id")
+					},
+					defaults: {
+						mentee_id: Mentee.getDataValue("id")
+					}
+				}).then(async ([form,created]) => {
+					if(created){
+						var newCV = await Db.CV.create()
+			
+						form.setDataValue("cv_id",newCV.getDataValue("id"));
+			
+						await form.save();
+						await newCV.save();
+			
+					}else{
+					}
+
+					Mentee?.setDataValue("form_id", form.getDataValue("id"));
+
+					Mentee.save();
+				})
+
+				await Mentee.save();
 
 				return res.json({
 					success: true,

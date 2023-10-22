@@ -39,29 +39,35 @@ MenteeApiRouter.get("/add", async(req, res) => {
 	)
 });
 
-MenteeApiRouter.put("/update/:id", async(req, res) => {
+MenteeApiRouter.post("/update/:id", async(req, res) => {
     const id = req.params.id
-    const menteeData = req.body;
+    let menteeData = req.body;
     console.log(`MENTEE DATA: `,menteeData);
 
-    menteeData.password = md5(menteeData.password);
-    menteeData.verified = false;
-    menteeData.accepted = false;
-    menteeData.verify_code = generate(6);
-
-    const mentee = await Mentee.findOne({where:{id:id}});
+    let mentee = await Mentee.findOne({where:{id:id}});
 
     if (!mentee) {
         return res.status(400).json({ message: 'Mentee not found' })
     }
 
-    const updateMentee = await Mentee.update( menteeData, { where: { id: id} });
+    mentee.update({
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        phone: req.body.phone,
+        linkedin: req.body.linkedin
+    });
 
-	res.json(
+    mentee.save();
+
+    const accessToken = jwt.sign(mentee.dataValues, process.env.ACCESS_TOKEN_SECRET);
+
+	return res.json(
 		{
 			success: true,
-			data: [...updateMentee],
+			data: mentee.dataValues,
 			message: "mentee-api-updated",
+            accessToken: accessToken
 		}
 	)
 });
