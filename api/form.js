@@ -326,7 +326,58 @@ apiRouter.get("/get-form",authenticateToken,async (req,res)=>{
 				}).getDataValue("id"),
 				
 			}
-		})
+		});
+
+		let post_mentoring_process = await Db.PostMentoringProcess.findOne({
+			where: {
+				cv_id: cv_id
+			}
+		});
+
+		if(!post_mentoring_process){
+			post_mentoring_process = {
+				id: 0,
+				question_1:"",
+				question_2:[],
+				question_3:"",
+				question_4:"",
+				question_5:""
+			}
+		}
+
+		let mentoring_process_general_information = await Db.MentoringProcessGeneralInformation.findOne({
+			where: {
+				cv_id: cv_id
+			}
+		});
+
+		if(!mentoring_process_general_information){
+			mentoring_process_general_information = {
+				id: 0,
+				question_1:"",
+				question_2:[],
+				question_3:"",
+				question_4:"",
+				question_5:""
+			}
+		}
+
+		let mentoring_process_detailed_information = await Db.MentoringProcessDetailedInformation.findOne({
+			where: {
+				cv_id: cv_id
+			}
+		});
+
+		if(!mentoring_process_detailed_information){
+			mentoring_process_detailed_information = {
+				id: 0,
+				question_1:"",
+				question_2:[],
+				question_3:"",
+				question_4:"",
+				question_5:""
+			}
+		}
 
 		return res.json({
 			success: true,
@@ -337,7 +388,10 @@ apiRouter.get("/get-form",authenticateToken,async (req,res)=>{
 			languages: languages,
 			computer_skills: computer_skills,
 			publishes:publishes,
-			hobbies:hobbies
+			hobbies:hobbies,
+			post_mentoring_process: post_mentoring_process.dataValues,
+			mentoring_process_general_information: mentoring_process_general_information.dataValues,
+			mentoring_process_detailed_information: mentoring_process_detailed_information.dataValues
 		})
 	} catch (error) {
 		return res.json({
@@ -758,10 +812,427 @@ apiRouter.post("/fill-form",authenticateToken,async (req,res)=>{
 	}
 })
 
+apiRouter.post("/delete-item-from-form",authenticateToken, async(req,res)=>{
+	try {
+		if(req.body.key == "education"){
+			let education_cv2 = await Db.CV2EducationInformation.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
 
+			let education = await Db.EducationInformation.findOne({
+				where: {
+					id: education_cv2.getDataValue("education_information_id")
+				}
+			})
+
+			education.destroy();
+
+			education_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "education-deleted"
+			})
+		}else if(req.body.key == "experience"){
+			let experience_cv2 = await Db.CV2ExperienceInformation.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+
+			let experience = await Db.ExperienceInformation.findOne({
+				where: {
+					id: experience_cv2.getDataValue("experience_information_id")
+				}
+			})
+
+			experience.destroy();
+
+			experience_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "experience-deleted"
+			})
+		}else if(req.body.key == "course"){
+			let course_cv2 = await Db.CV2CourseInformation.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+
+			let course = await Db.CourseInformation.findOne({
+				where: {
+					id: course_cv2.getDataValue("course_information_id")
+				}
+			})
+
+			course.destroy();
+
+			course_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "course-deleted"
+			})
+		}else if(req.body.key == "project"){
+			let project_cv2 = await Db.CV2ProjectInformation.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+
+			let project = await Db.ProjectInformation.findOne({
+				where: {
+					id: project_cv2.getDataValue("project_information_id")
+				}
+			})
+
+			project.destroy();
+
+			project_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "project-deleted"
+			})
+		}else if(req.body.key == "publish"){
+			let publish_cv2 = await Db.CV2Publish.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+
+			let publish = await Db.Publish.findOne({
+				where: {
+					id: publish_cv2.getDataValue("publish_id")
+				}
+			})
+
+			publish.destroy();
+
+			publish_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "publish-deleted"
+			})
+		}else if(req.body.key == "hobby"){
+			let hobby_cv2 = await Db.CV2Hobby.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+
+			let hobby = await Db.Hobby.findOne({
+				where: {
+					id: hobby_cv2.getDataValue("hobby_id")
+				}
+			})
+
+			hobby.destroy();
+
+			hobby_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "hobby-deleted"
+			})
+		}else if(req.body.key == "language"){
+			let language_cv2 = await Db.CV2Language.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+			
+			language_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "language-deleted"
+			})
+		}else if(req.body.key == "computer-skill"){
+			let computer_skill_cv2 = await Db.CV2ComputerSkill.findOne({
+				where: {
+					id: req.body.id
+				}
+			});
+			
+			computer_skill_cv2.destroy();
+
+			return res.send({
+				success: true,
+				error: false,
+				message: "computer-skill-deleted"
+			})
+		}else{
+			return res.send({
+				success: false,
+				error: false,
+				message: "key-not-found"
+			})
+		}
+	} catch (error) {
+		console.log("ERROR: ",error)
+		return res.json({
+			success: false,
+			error: true,
+			err: await error
+		})
+	}
+})
+
+apiRouter.post("/mentoring-process-general-information-form",authenticateToken,async (req,res)=>{
+	try {
+
+		let form = await Db.MenteeForm.findOne({
+			where:{
+				mentee_id: req.user.id
+			}
+		})
+
+		let cv_id = form.getDataValue("cv_id");
+
+		let [mentoring_process_general_information,created] = await Db.MentoringProcessGeneralInformation.findOrCreate({
+			where:{
+				cv_id:cv_id
+			},
+			defaults:{
+				question_1: req.body.question_1,
+				question_2: req.body.question_2,
+				question_3: req.body.question_3,
+				question_4: req.body.question_4,
+				question_5: req.body.question_5
+			}
+		});
+
+		if(!created){
+			mentoring_process_general_information.update({
+				question_1: req.body.question_1,
+				question_2: req.body.question_2,
+				question_3: req.body.question_3,
+				question_4: req.body.question_4,
+				question_5: req.body.question_5
+			});
+
+			mentoring_process_general_information.save();
+		}
+
+		return res.send({
+			success: true,
+			data: mentoring_process_general_information.dataValues
+		})
+
+	} catch (error) {
+		console.log("ERROR: ",error)
+		return res.json({
+			success: false,
+			error: true,
+			err: await error
+		})
+	}
+})
+
+apiRouter.post("/post-mentoring-process",authenticateToken,async (req,res)=>{
+	try {
+
+		let form = await Db.MenteeForm.findOne({
+			where:{
+				mentee_id: req.user.id
+			}
+		})
+
+		let cv_id = form.getDataValue("cv_id");
+
+		let [post_mentoring_process,created] = await Db.PostMentoringProcess.findOrCreate({
+			where:{
+				cv_id:cv_id
+			},
+			defaults:{
+				question_1: req.body.question_1,
+				question_2: req.body.question_2,
+				question_3: req.body.question_3,
+				question_4: req.body.question_4
+			}
+		});
+
+		if(!created){
+			post_mentoring_process.update({
+				question_1: req.body.question_1,
+				question_2: req.body.question_2,
+				question_3: req.body.question_3,
+				question_4: req.body.question_4
+			});
+
+			post_mentoring_process.save();
+		}
+
+		return res.send({
+			success: true,
+			data: post_mentoring_process.dataValues
+		})
+
+	} catch (error) {
+		console.log("ERROR: ",error)
+		return res.json({
+			success: false,
+			error: true,
+			err: await error
+		})
+	}
+})
+
+apiRouter.post("/mentoring-process-detailed-information-form",authenticateToken,async (req,res)=>{
+	try {
+		let form = await Db.MenteeForm.findOne({
+			where:{
+				mentee_id: req.user.id
+			}
+		})
+
+		let cv_id = form.getDataValue("cv_id");
+
+		let [mentoring_process_detailed_information,created] = await Db.MentoringProcessDetailedInformation.findOrCreate({
+			where:{
+				cv_id:cv_id
+			},
+			defaults:{
+				lisans_ve_lisansustu_tez_mentorlugu_question_1: 
+					req.body.lisans_ve_lisansustu_tez_mentorlugu_question_1?
+						req.body.lisans_ve_lisansustu_tez_mentorlugu_question_1
+						:"",
+				lisans_ve_lisansustu_tez_mentorlugu_question_2: 
+					req.body.lisans_ve_lisansustu_tez_mentorlugu_question_2?
+						req.body.lisans_ve_lisansustu_tez_mentorlugu_question_2
+						:"",
+				lisans_ve_lisansustu_tez_mentorlugu_question_3: 
+					req.body.lisans_ve_lisansustu_tez_mentorlugu_question_3?
+						req.body.lisans_ve_lisansustu_tez_mentorlugu_question_3
+						:"",
+				proje_mentorlugu_question_1: 
+					req.body.proje_mentorlugu_question_1?
+						req.body.proje_mentorlugu_question_1
+						:"",
+				proje_mentorlugu_question_2: 
+					req.body.proje_mentorlugu_question_2?
+						req.body.proje_mentorlugu_question_2
+						:"",
+				proje_mentorlugu_question_3: 
+					req.body.proje_mentorlugu_question_3?
+						req.body.proje_mentorlugu_question_3
+						:"",
+				akademik_ve_kariyer_mentorlugu_question_1: 
+					req.body.akademik_ve_kariyer_mentorlugu_question_1?
+						req.body.akademik_ve_kariyer_mentorlugu_question_1
+						:"",
+				akademik_ve_kariyer_mentorlugu_question_2: 
+					req.body.akademik_ve_kariyer_mentorlugu_question_2?
+						req.body.akademik_ve_kariyer_mentorlugu_question_2
+						:"",
+				girisimcilik_mentorlugu_question_1: 
+					req.body.girisimcilik_mentorlugu_question_1?
+						req.body.girisimcilik_mentorlugu_question_1
+						:"",
+				girisimcilik_mentorlugu_question_2: 
+					req.body.girisimcilik_mentorlugu_question_2?
+						req.body.girisimcilik_mentorlugu_question_2
+						:"",
+				girisimcilik_mentorlugu_question_3: 
+					req.body.girisimcilik_mentorlugu_question_3?
+						req.body.girisimcilik_mentorlugu_question_3
+						:"",
+				akran_mentorlugu_question_1: 
+					req.body.akran_mentorlugu_question_1?
+						req.body.akran_mentorlugu_question_1
+						:"",
+				akran_mentorlugu_question_2: 
+					req.body.akran_mentorlugu_question_2?
+						req.body.akran_mentorlugu_question_2
+						:""
+			}
+		});
+
+		if(!created){
+			mentoring_process_detailed_information.update({
+				lisans_ve_lisansustu_tez_mentorlugu_question_1: 
+					req.body.lisans_ve_lisansustu_tez_mentorlugu_question_1?
+						req.body.lisans_ve_lisansustu_tez_mentorlugu_question_1
+						:"",
+				lisans_ve_lisansustu_tez_mentorlugu_question_2: 
+					req.body.lisans_ve_lisansustu_tez_mentorlugu_question_2?
+						req.body.lisans_ve_lisansustu_tez_mentorlugu_question_2
+						:"",
+				lisans_ve_lisansustu_tez_mentorlugu_question_3: 
+					req.body.lisans_ve_lisansustu_tez_mentorlugu_question_3?
+						req.body.lisans_ve_lisansustu_tez_mentorlugu_question_3
+						:"",
+				proje_mentorlugu_question_1: 
+					req.body.proje_mentorlugu_question_1?
+						req.body.proje_mentorlugu_question_1
+						:"",
+				proje_mentorlugu_question_2: 
+					req.body.proje_mentorlugu_question_2?
+						req.body.proje_mentorlugu_question_2
+						:"",
+				proje_mentorlugu_question_3: 
+					req.body.proje_mentorlugu_question_3?
+						req.body.proje_mentorlugu_question_3
+						:"",
+				akademik_ve_kariyer_mentorlugu_question_1: 
+					req.body.akademik_ve_kariyer_mentorlugu_question_1?
+						req.body.akademik_ve_kariyer_mentorlugu_question_1
+						:"",
+				akademik_ve_kariyer_mentorlugu_question_2: 
+					req.body.akademik_ve_kariyer_mentorlugu_question_2?
+						req.body.akademik_ve_kariyer_mentorlugu_question_2
+						:"",
+				girisimcilik_mentorlugu_question_1: 
+					req.body.girisimcilik_mentorlugu_question_1?
+						req.body.girisimcilik_mentorlugu_question_1
+						:"",
+				girisimcilik_mentorlugu_question_2: 
+					req.body.girisimcilik_mentorlugu_question_2?
+						req.body.girisimcilik_mentorlugu_question_2
+						:"",
+				girisimcilik_mentorlugu_question_3: 
+					req.body.girisimcilik_mentorlugu_question_3?
+						req.body.girisimcilik_mentorlugu_question_3
+						:"",
+				akran_mentorlugu_question_1: 
+					req.body.akran_mentorlugu_question_1?
+						req.body.akran_mentorlugu_question_1
+						:"",
+				akran_mentorlugu_question_2: 
+					req.body.akran_mentorlugu_question_2?
+						req.body.akran_mentorlugu_question_2
+						:""
+			});
+
+			mentoring_process_detailed_information.save();
+		}
+
+		return res.send({
+			success: true,
+			data: mentoring_process_detailed_information.dataValues
+		})
+
+	} catch (error) {
+		console.log("ERROR: ",error)
+		return res.json({
+			success: false,
+			error: true,
+			err: await error
+		})
+	}
+})
 
 export default apiRouter;
-
-
-
-

@@ -170,6 +170,129 @@ const CV = sequelize.define(
 	}
 );
 
+const MentoringProcessGeneralInformation = sequelize.define(
+	"mentoring_process_general_information",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		cv_id: {
+			type: DataTypes.INTEGER
+		},
+		question_1: {
+			type: DataTypes.STRING
+		},
+		question_2: {
+			type: DataTypes.ARRAY(DataTypes.STRING)
+		},
+		question_3: {
+			type: DataTypes.STRING
+		},
+		question_4: {
+			type: DataTypes.STRING
+		},
+		question_5: {
+			type: DataTypes.STRING
+		}
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+)
+
+const PostMentoringProcess = sequelize.define(
+	"post_mentoring_process",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		cv_id: {
+			type: DataTypes.INTEGER
+		},
+		question_1: {
+			type: DataTypes.ARRAY(DataTypes.STRING)
+		},
+		question_2: {
+			type: DataTypes.STRING
+		},
+		question_3: {
+			type: DataTypes.STRING
+		},
+		question_4: {
+			type: DataTypes.STRING
+		}
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+)
+
+const MentoringProcessDetailedInformation = sequelize.define(
+	"mentoring_process_detailed_information",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		cv_id: {
+			type: DataTypes.INTEGER
+		},
+		lisans_ve_lisansustu_tez_mentorlugu_question_1: {
+			type: DataTypes.STRING
+		},
+		lisans_ve_lisansustu_tez_mentorlugu_question_2: {
+			type: DataTypes.STRING
+		},
+		lisans_ve_lisansustu_tez_mentorlugu_question_3: {
+			type: DataTypes.STRING
+		},
+		proje_mentorlugu_question_1: {
+			type: DataTypes.STRING
+		},
+		proje_mentorlugu_question_2: {
+			type: DataTypes.STRING
+		},
+		proje_mentorlugu_question_3: {
+			type: DataTypes.STRING
+		},
+		akademik_ve_kariyer_mentorlugu_question_1: {
+			type: DataTypes.STRING
+		},
+		akademik_ve_kariyer_mentorlugu_question_2: {
+			type: DataTypes.STRING
+		},
+		girisimcilik_mentorlugu_question_1: {
+			type: DataTypes.STRING
+		},
+		girisimcilik_mentorlugu_question_2: {
+			type: DataTypes.STRING
+		},
+		girisimcilik_mentorlugu_question_3: {
+			type: DataTypes.STRING
+		},
+		akran_mentorlugu_question_1: {
+			type: DataTypes.STRING
+		},
+		akran_mentorlugu_question_2: {
+			type: DataTypes.STRING
+		}
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+)
+
 const Hobby = sequelize.define(
 	"hobby",
 	{
@@ -643,4 +766,4 @@ export { sequelize, PublicUser, SuperAdmin, Mentee, MenteeForm, CV,
 		Hobby, CV2Hobby, Language, CV2Language, Publish, CV2Publish, ComputerSkill, 
 		CV2ComputerSkill, EducationInformation , CV2EducationInformation, 
 		ExperienceInformation, CV2ExperienceInformation, CourseInformation, CV2CourseInformation, 
-		ProjectInformation , CV2ProjectInformation};
+		ProjectInformation , CV2ProjectInformation,MentoringProcessGeneralInformation,MentoringProcessDetailedInformation, PostMentoringProcess};
