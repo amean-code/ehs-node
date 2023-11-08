@@ -379,6 +379,24 @@ apiRouter.get("/get-form",authenticateToken,async (req,res)=>{
 			}
 		}
 
+		let university_representation_process_general_information = await Db.UniversityRepresentationProcessGeneralInformation.findOne({
+			where: {
+				cv_id: cv_id
+			}
+		});
+
+		if(!university_representation_process_general_information){
+			university_representation_process_general_information = {
+				id: 0,
+				question_1:"",
+				question_2:"",
+				question_3:"",
+				question_4:"",
+				question_5:"",
+				question_6:""
+			}
+		}
+
 		return res.json({
 			success: true,
 			educations: education_informations,
@@ -391,7 +409,8 @@ apiRouter.get("/get-form",authenticateToken,async (req,res)=>{
 			hobbies:hobbies,
 			post_mentoring_process: post_mentoring_process.dataValues,
 			mentoring_process_general_information: mentoring_process_general_information.dataValues,
-			mentoring_process_detailed_information: mentoring_process_detailed_information.dataValues
+			mentoring_process_detailed_information: mentoring_process_detailed_information.dataValues,
+			university_representation_process_general_information:university_representation_process_general_information
 		})
 	} catch (error) {
 		return res.json({
@@ -1030,6 +1049,61 @@ apiRouter.post("/mentoring-process-general-information-form",authenticateToken,a
 		return res.send({
 			success: true,
 			data: mentoring_process_general_information.dataValues
+		})
+
+	} catch (error) {
+		console.log("ERROR: ",error)
+		return res.json({
+			success: false,
+			error: true,
+			err: await error
+		})
+	}
+})
+
+apiRouter.post("/university-representation-process-general-information",authenticateToken,async (req,res)=>{
+	try {
+
+		let form = await Db.MenteeForm.findOne({
+			where:{
+				mentee_id: req.user.id
+			}
+		})
+
+		let cv_id = form.getDataValue("cv_id");
+
+		console.timeLog("FORM BODY: ",req.body);
+
+		let [university_representation_process_general_information,created] = await Db.UniversityRepresentationProcessGeneralInformation.findOrCreate({
+			where:{
+				cv_id:cv_id
+			},
+			defaults:{
+				question_1: req.body.question_1,
+				question_2: req.body.question_2,
+				question_3: req.body.question_3,
+				question_4: req.body.question_4,
+				question_5: req.body.question_5,
+				question_6: req.body.question_6
+			}
+		});
+
+		if(!created){
+			university_representation_process_general_information.update({
+				question_1: req.body.question_1,
+				question_2: req.body.question_2,
+				question_3: req.body.question_3,
+				question_4: req.body.question_4,
+				question_5: req.body.question_5,
+				question_6: req.body.question_6
+			});
+
+			university_representation_process_general_information.save();
+		}
+
+		return res.send({
+			success: true,
+			data: university_representation_process_general_information.dataValues
 		})
 
 	} catch (error) {
