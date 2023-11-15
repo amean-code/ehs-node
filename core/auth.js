@@ -308,6 +308,71 @@ authRouter.post("/login", async (req, res) => {
 	}
 })
 
+
+authRouter.post("/login-admin", async (req, res) => {
+	try {
+		if(!req.body.email){
+			return res.json({
+				success: false,
+				error: false,
+				message: "emal_required",
+				data:[]
+			})
+		}
+		if(!req.body.password){
+			return res.json({
+				success: false,
+				error: false,
+				message: "password_required",
+				data:[]
+			})
+		}
+
+		let Admin = await Db.Admin.findOne({
+			where:{
+				email: req.body.email
+			}
+		})
+
+		if(Admin){
+			if(Admin?.getDataValue("password")=== md5(req.body.password)){
+
+				const accessToken = jwt.sign(Admin.dataValues, process.env.ACCESS_TOKEN_SECRET);				
+				return res.json({
+					success: true,
+					error: false,
+					message: "Giriş Yapıldı",
+					data: Admin,
+					accessToken: accessToken
+				})
+			}else{
+				return res.json({
+					success: false,
+					error: false,
+					message: "auth_failed",
+					data: []
+				})
+			}
+				
+		}else{
+			return res.json({
+				success: false,
+				error: false,
+				message: "user_not_found",
+				data: []
+			})
+		}
+	} catch (error) {
+		return res.json({
+			success: false,
+			error: true,
+			err: await error,
+			message: "something_went_wrong",
+			data: []
+		})
+	}
+})
+
 function generate_verify_code() {
 	let chars = [
 		"0",

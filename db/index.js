@@ -132,6 +132,36 @@ const Mentee = sequelize.define(
 	}
 );
 
+
+const Admin = sequelize.define(
+	"ehs_admin",
+	{
+		id: {
+			type: DataTypes.INTEGER,
+			autoIncrement: true,
+			primaryKey: true,
+		},
+		name: {
+			type: DataTypes.STRING,
+		},
+		surname: {
+			type: DataTypes.STRING,
+		},
+		email: {
+			type: DataTypes.STRING,
+		},
+		password: {
+			type: DataTypes.STRING,
+		}
+	},
+	{
+		freezeTableName: true,
+        createdAt: true,
+        updatedAt: true
+	}
+);
+
+
 const MenteeForm = sequelize.define(
 	"mentee_form",
 	{
@@ -803,4 +833,4 @@ export { sequelize, PublicUser, SuperAdmin, Mentee, MenteeForm, CV,
 		Hobby, CV2Hobby, Language, CV2Language, Publish, CV2Publish, ComputerSkill, 
 		CV2ComputerSkill, EducationInformation , CV2EducationInformation, 
 		ExperienceInformation, CV2ExperienceInformation, CourseInformation, CV2CourseInformation, 
-		ProjectInformation , CV2ProjectInformation,MentoringProcessGeneralInformation,MentoringProcessDetailedInformation, PostMentoringProcess, UniversityRepresentationProcessGeneralInformation};
+		ProjectInformation , CV2ProjectInformation,MentoringProcessGeneralInformation,MentoringProcessDetailedInformation, PostMentoringProcess, UniversityRepresentationProcessGeneralInformation, Admin};
