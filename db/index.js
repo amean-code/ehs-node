@@ -19,7 +19,7 @@ if (process.env.NODE_ENV == "production") {
 		});
 	}
 } else {
-	sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ehs-db.postgres.database.azure.com:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
+	sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
 		dialect: "postgres",
 		dialectOptions: {
 			ssl: {
