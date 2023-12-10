@@ -60,44 +60,44 @@ app.use("/api",apiRouter);
 app.use("/auth", authRouter);
 
 // * ERROR HANDLING
-// app.use((err, req, res, next) => {
-// 	const status = err.status || 500;
-// 	const message = err.message || "EHS BACKEND SERVER HATASI !!"
-// 	console.error(`status: ${status} - ERROR: `,err);
-// 	return res.status(500).json({
-// 		code: status,
-// 		msg: message,
-// 	});
-// });
+app.use((err, req, res, next) => {
+	const status = err.status || 500;
+	const message = err.message || "EHS BACKEND SERVER HATASI !!"
+	console.error(`status: ${status} - ERROR: `,err);
+	return res.status(500).json({
+		code: status,
+		msg: message,
+	});
+});
 
 // // CONNECT DATABASE
-// sequelize
-// 	.sync({ force: process.env.NODE_ENV != "production" && false }) // ! BU SATIR INCELENMELI
-// 	.then(async () => {
-// 		SuperAdmin.findOrCreate({
-// 			where: {id:0},
-// 			defaults: {id: 0,
-// 				name: "AMEAN",
-// 				surname: "DANISMANLIK",
-// 				email: "amean.hesaplar@gmail.com",
-// 				password: md5("admin")},
-// 		},)
+sequelize
+	.sync() 
+	.then(async () => {
+		SuperAdmin.findOrCreate({
+			where: {id:0},
+			defaults: {id: 0,
+				name: "AMEAN",
+				surname: "DANISMANLIK",
+				email: "amean.hesaplar@gmail.com",
+				password: md5("admin")},
+		},)
 
-// 		PublicUser.findOrCreate({
-// 			where: {id:0},
-// 			defaults: {id: 0,
-// 				name: "Demo",
-// 				surname: "User",
-// 				email: "demo@gmail.com",
-// 				password: md5("demo"),
-// 				verified: false,
-// 			verify_code: "111111",
-// 		accepted: true},
-// 		},)
-// 		app.listen(PORT, () => {
-//             console.log(`PORT ${PORT} dinleniyor...`);
-//         })
-// 	});
+		PublicUser.findOrCreate({
+			where: {id:0},
+			defaults: {id: 0,
+				name: "Demo",
+				surname: "User",
+				email: "demo@gmail.com",
+				password: md5("demo"),
+				verified: false,
+			verify_code: "111111",
+		accepted: true},
+		},)
+		app.listen(PORT, () => {
+            console.log(`PORT ${PORT} dinleniyor...`);
+        })
+	});
 
 app.listen(PORT, () => {
 	console.log(`PORT ${PORT} dinleniyor...`);

@@ -12,14 +12,21 @@ if (process.env.NODE_ENV == "production") {
 			dialect: "postgres",
 			dialectOptions: {
 				ssl: {
+					require: true,
 					rejectUnauthorized: false
 				}
 			}
 		});
 	}
 } else {
-	sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@localhost:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
+	sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
 		dialect: "postgres",
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false
+			}
+		}
 	});
 }
 
