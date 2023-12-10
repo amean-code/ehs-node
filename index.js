@@ -49,6 +49,13 @@ app.get("/", (req,res) => {
     })
 })
 
+app.get("/amean", (req,res) => {
+    res.status(200).send({
+        success: true,
+        message: "AMEAN WAS HERE..."
+    })
+})
+
 app.use("/api",apiRouter);
 app.use("/auth", authRouter);
 
