@@ -99,9 +99,9 @@ sequelize
         })
 	});
 
-app.listen(PORT, () => {
-	console.log(`PORT ${PORT} dinleniyor...`);
-})
+// app.listen(PORT, () => {
+// 	console.log(`PORT ${PORT} dinleniyor...`);
+// })
 
 export { jwt , md5, transporter }
 
